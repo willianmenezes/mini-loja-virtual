@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace LojaVirtual.Application.Controllers;
+namespace LojaVirtual.WEB.Controllers;
 
 [ApiController]
 [Route("[controller]")]

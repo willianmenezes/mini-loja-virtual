@@ -1,4 +1,4 @@
-namespace LojaVirtual.Application;
+namespace LojaVirtual.WEB;
 
 public class WeatherForecast
 {

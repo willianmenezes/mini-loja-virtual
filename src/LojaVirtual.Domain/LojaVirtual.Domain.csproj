@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\LojaVirtual.Core\LojaVirtual.Core.csproj" />
+    </ItemGroup>
+
 </Project>
