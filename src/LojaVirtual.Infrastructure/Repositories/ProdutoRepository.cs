@@ -21,7 +21,7 @@ public class ProdutoRepository : IProdutoRepository
         await _dbContext.Produtos.AddAsync(produto);
     }
 
-    public async Task<IQueryable<Produto>> BuscarTodos()
+    public IQueryable<Produto> BuscarTodos()
     {
         return _dbContext.Produtos.Where(p => p.Ativo);
     }

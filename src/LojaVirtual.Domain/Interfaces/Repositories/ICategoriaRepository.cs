@@ -7,5 +7,5 @@ public interface ICategoriaRepository
 {
     IUnityOfWork UnityOfWork { get; }
     Task Adicionar(Categoria categoria);
-    Task<IQueryable<Categoria>> BuscarTodos();
+    IQueryable<Categoria> BuscarTodos();
 }

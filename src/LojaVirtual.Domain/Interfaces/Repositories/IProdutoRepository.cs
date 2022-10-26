@@ -7,5 +7,5 @@ public interface IProdutoRepository
 {
     IUnityOfWork UnityOfWork { get; }
     Task Adicionar(Produto produto);
-    Task<IQueryable<Produto>> BuscarTodos();
+    IQueryable<Produto> BuscarTodos();
 }
