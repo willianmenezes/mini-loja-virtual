@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace LojaVirtual.Application.NotificationError;
+namespace LojaVirtual.Core.NotificationError;
 
 public class NotificacaoErro : INotification
 {

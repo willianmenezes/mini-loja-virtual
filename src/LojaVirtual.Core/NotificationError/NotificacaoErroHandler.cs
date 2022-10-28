@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace LojaVirtual.Application.NotificationError;
+namespace LojaVirtual.Core.NotificationError;
 
 public class NotificacaoErroHandler : INotificationHandler<NotificacaoErro>
 {
@@ -17,6 +17,6 @@ public class NotificacaoErroHandler : INotificationHandler<NotificacaoErro>
         await Task.CompletedTask;
     }
 
-    public IEnumerable<NotificacaoErro> ObterErros => _erros;
+    public IEnumerable<NotificacaoErro> ObterErros() => _erros;
     public bool ExisteErros() => _erros.Any();
 }

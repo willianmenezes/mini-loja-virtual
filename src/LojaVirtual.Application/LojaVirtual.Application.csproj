@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="DTOs" />
+      <Folder Include="Handlers\Produto" />
       <Folder Include="Mappings" />
     </ItemGroup>
 
@@ -15,12 +15,11 @@
       <PackageReference Include="AutoMapper" Version="12.0.0" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
       <PackageReference Include="FluentValidation" Version="11.2.2" />
-      <PackageReference Include="MediatR" Version="11.0.0" />
-      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\LojaVirtual.Core\LojaVirtual.Core.csproj" />
+      <ProjectReference Include="..\LojaVirtual.Domain\LojaVirtual.Domain.csproj" />
     </ItemGroup>
 
 </Project>

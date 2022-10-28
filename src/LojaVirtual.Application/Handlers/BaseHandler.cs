@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using LojaVirtual.Application.NotificationError;
+using LojaVirtual.Core.NotificationError;
 using MediatR;
 
 namespace LojaVirtual.Application.Handlers;
