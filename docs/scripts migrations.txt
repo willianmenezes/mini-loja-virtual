@@ -1,0 +1,12 @@
+scripts migrations
+
+- instalar ferramente global dotnet ef
+dotnet tool install --global dotnet-ef
+
+- Executar migrations (Detalhes de quando esta em varios projetos)
+dotnet ef migrations add Inicial --startup-project .\src\LojaVirtual.WEB\LojaVirtual.WEB.csproj  --project .\src\LojaVirtual
+.Infrastructure\LojaVirtual.Infrastructure.csproj -o Migrations
+
+dotnet ef database update --startup-project .\src\LojaVirtual.WEB\LojaVirtual.WEB.csproj  --project .\src\LojaVirtual.Infras
+tructure\LojaVirtual.Infrastructure.csproj
+
