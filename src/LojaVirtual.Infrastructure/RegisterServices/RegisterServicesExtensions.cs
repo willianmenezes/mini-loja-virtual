@@ -1,4 +1,6 @@
-﻿using LojaVirtual.Domain.Interfaces.Repositories;
+﻿using LojaVirtual.Application.DTOs;
+using LojaVirtual.Domain.Interfaces.DTOs;
+using LojaVirtual.Domain.Interfaces.Repositories;
 using LojaVirtual.Infrastructure.Context;
 using LojaVirtual.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +19,7 @@ public static class RegisterServicesExtensions
 
         services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         services.AddScoped<IProdutoRepository, ProdutoRepository>();
+        services.AddScoped(typeof(IPaginacao<>), typeof(Paginacao<>));
         return services;
     }
 }
