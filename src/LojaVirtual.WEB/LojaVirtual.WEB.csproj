@@ -7,12 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\LojaVirtual.Application\LojaVirtual.Application.csproj" />
       <ProjectReference Include="..\LojaVirtual.Core\LojaVirtual.Core.csproj" />
+      <ProjectReference Include="..\LojaVirtual.Infrastructure\LojaVirtual.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

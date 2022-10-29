@@ -10,8 +10,8 @@ namespace LojaVirtual.WEB.Controllers;
 [Route("[controller]")]
 public class CategoriasController : MainController
 {
-    public CategoriasController(IMediator mediator, NotificacaoErroHandler notificacaoErroHandler) : base(mediator,
-        notificacaoErroHandler)
+    public CategoriasController(IMediator mediator, INotificationHandler<NotificacaoErro> notificationHandler) : base(mediator,
+        notificationHandler)
     {
     }
 

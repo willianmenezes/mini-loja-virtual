@@ -10,10 +10,10 @@ public abstract class MainController : ControllerBase
     protected readonly IMediator Mediator;
     protected readonly NotificacaoErroHandler NotificacaoErroHandler;
     
-    protected MainController(IMediator mediator, NotificacaoErroHandler notificacaoErroHandler)
+    protected MainController(IMediator mediator, INotificationHandler<NotificacaoErro> notificationHandler)
     {
         Mediator = mediator;
-        NotificacaoErroHandler = notificacaoErroHandler;
+        NotificacaoErroHandler =  (NotificacaoErroHandler)notificationHandler;;
     }
     
     protected bool ProcessoInvalido()
