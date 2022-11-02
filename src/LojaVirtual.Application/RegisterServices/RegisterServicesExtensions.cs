@@ -1,5 +1,6 @@
 ﻿using LojaVirtual.Application.Handlers.CategoriaHandler;
 using LojaVirtual.Application.Handlers.CategoriaHandler.Cadastrar;
+using LojaVirtual.Application.Handlers.CategoriaHandler.Listar;
 using LojaVirtual.Application.Mappings;
 using LojaVirtual.Core.DTOs;
 using MediatR;
@@ -12,6 +13,7 @@ public static class RegisterServicesExtensions
     public static IServiceCollection RegistrarServicosApplication(this IServiceCollection services)
     {
         services.AddScoped<IRequestHandler<CadastrarCategoriaRequest, BaseResponse>, CategoriaHandler>();
+        services.AddScoped<IRequestHandler<ListarCategoriaRequest, BaseResponse>, CategoriaHandler>();
         services.AddAutoMapper(typeof(CategoriaProfile));
         return services;
     }

@@ -15,7 +15,7 @@ public class CategoriaRepository : ICategoriaRepository
         _dbContext = dbContext;
     }
 
-    public async Task Adicionar(Categoria categoria)
+    public async Task AdicionarAsync(Categoria categoria)
     {
         await _dbContext.Categorias.AddAsync(categoria);
     }

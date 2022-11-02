@@ -16,7 +16,7 @@ public class ProdutoRepository : IProdutoRepository
         _dbContext = dbContext;
     }
     
-    public async Task Adicionar(Produto produto)
+    public async Task AdicionarAsync(Produto produto)
     {
         await _dbContext.Produtos.AddAsync(produto);
     }

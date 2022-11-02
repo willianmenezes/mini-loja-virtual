@@ -6,6 +6,6 @@ namespace LojaVirtual.Domain.Interfaces.Repositories;
 public interface IProdutoRepository
 {
     IUnityOfWork UnityOfWork { get; }
-    Task Adicionar(Produto produto);
+    Task AdicionarAsync(Produto produto);
     IQueryable<Produto> BuscarTodos();
 }

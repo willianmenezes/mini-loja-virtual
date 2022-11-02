@@ -6,6 +6,6 @@ namespace LojaVirtual.Domain.Interfaces.Repositories;
 public interface ICategoriaRepository
 {
     IUnityOfWork UnityOfWork { get; }
-    Task Adicionar(Categoria categoria);
+    Task AdicionarAsync(Categoria categoria);
     IQueryable<Categoria> BuscarTodos();
 }

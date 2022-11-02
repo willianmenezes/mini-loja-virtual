@@ -2,7 +2,7 @@
 
 namespace LojaVirtual.Core.DTOs;
 
-public class BaseResponse
+public record BaseResponse
 {
     public bool Status { get; set; }
     public object? Resultado { get; set; }

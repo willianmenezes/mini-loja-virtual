@@ -1,4 +1,5 @@
 using LojaVirtual.Application.Handlers.CategoriaHandler.Cadastrar;
+using LojaVirtual.Application.Handlers.CategoriaHandler.Listar;
 using LojaVirtual.Core.DTOs;
 using LojaVirtual.Core.NotificationError;
 using MediatR;
@@ -16,7 +17,18 @@ public class CategoriasController : MainController
     }
 
     [HttpPost]
-    public async Task<IActionResult> CadastrarCategoria([FromBody] CadastrarCategoriaRequest request)
+    public async Task<IActionResult> CadastrarCategoriaAsync([FromBody] CadastrarCategoriaRequest request)
+    {
+        var resultado = await Mediator.Send(request);
+
+        if (ProcessoInvalido())
+            return BadRequest(BaseResponse.Erro(ObterErros()));
+
+        return Ok(resultado);
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> ListarCategoriaAsync([FromQuery] ListarCategoriaRequest request)
     {
         var resultado = await Mediator.Send(request);
 

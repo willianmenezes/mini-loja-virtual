@@ -1,7 +1,7 @@
-﻿using LojaVirtual.Application.DTOs;
-using LojaVirtual.Domain.Interfaces.DTOs;
+﻿using LojaVirtual.Core.DTOs;
 using LojaVirtual.Domain.Interfaces.Repositories;
 using LojaVirtual.Infrastructure.Context;
+using LojaVirtual.Infrastructure.DTOs;
 using LojaVirtual.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

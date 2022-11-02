@@ -2,7 +2,7 @@
 
 namespace LojaVirtual.Core.NotificationError;
 
-public class NotificacaoErro : INotification
+public record NotificacaoErro : INotification
 {
     public string NomeProcesso { get; set; }
     public string Mensagem { get; set; }
