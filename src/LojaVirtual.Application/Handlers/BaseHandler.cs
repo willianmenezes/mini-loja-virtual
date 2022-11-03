@@ -16,14 +16,14 @@ public abstract class BaseHandler
         Mapper = mapper;
     }
 
-    protected bool Validar<TEntity, TValidator>(TEntity entity, TValidator validator) where TEntity : class
+    protected async Task<bool> ValidarAsync<TEntity, TValidator>(TEntity entity, TValidator validator) where TEntity : class
         where TValidator : AbstractValidator<TEntity>
     {
         var resultadoValidacao = validator.Validate(entity);
 
         foreach (var erro in resultadoValidacao.Errors)
         {
-            Mediator.Publish(new NotificacaoErro(entity.GetType().Name, erro.ErrorMessage));
+            await Mediator.Publish(new NotificacaoErro(entity.GetType().Name, erro.ErrorMessage));
         }
 
         return resultadoValidacao.IsValid;

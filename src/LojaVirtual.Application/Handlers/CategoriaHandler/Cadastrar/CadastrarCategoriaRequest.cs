@@ -3,8 +3,4 @@ using MediatR;
 
 namespace LojaVirtual.Application.Handlers.CategoriaHandler.Cadastrar;
 
-public record CadastrarCategoriaRequest : IRequest<BaseResponse>
-{
-    public string? Nome { get; set; }
-    public string? Descricao { get; set; }
-}
+public record CadastrarCategoriaRequest(string Nome, string Descricao) : IRequest<BaseResponse>;

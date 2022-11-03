@@ -7,5 +7,6 @@ public interface ICategoriaRepository
 {
     IUnityOfWork UnityOfWork { get; }
     Task AdicionarAsync(Categoria categoria);
+    Task<Categoria?> BuscarPorIdAsync(Guid id);
     IQueryable<Categoria> BuscarTodos();
 }

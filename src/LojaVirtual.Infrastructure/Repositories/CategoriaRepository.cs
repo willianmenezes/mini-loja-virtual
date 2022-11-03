@@ -2,6 +2,7 @@
 using LojaVirtual.Domain.Entities;
 using LojaVirtual.Domain.Interfaces.Repositories;
 using LojaVirtual.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace LojaVirtual.Infrastructure.Repositories;
 
@@ -18,6 +19,11 @@ public class CategoriaRepository : ICategoriaRepository
     public async Task AdicionarAsync(Categoria categoria)
     {
         await _dbContext.Categorias.AddAsync(categoria);
+    }
+
+    public async Task<Categoria?> BuscarPorIdAsync(Guid id)
+    {
+        return await _dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public IQueryable<Categoria> BuscarTodos()

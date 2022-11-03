@@ -1,5 +1,6 @@
 using LojaVirtual.Application.Handlers.CategoriaHandler.Cadastrar;
 using LojaVirtual.Application.Handlers.CategoriaHandler.Listar;
+using LojaVirtual.Application.Handlers.CategoriaHandler.ListarPorId;
 using LojaVirtual.Core.DTOs;
 using LojaVirtual.Core.NotificationError;
 using MediatR;
@@ -11,7 +12,8 @@ namespace LojaVirtual.WEB.Controllers;
 [Route("[controller]")]
 public class CategoriasController : MainController
 {
-    public CategoriasController(IMediator mediator, INotificationHandler<NotificacaoErro> notificationHandler) : base(mediator,
+    public CategoriasController(IMediator mediator, INotificationHandler<NotificacaoErro> notificationHandler) : base(
+        mediator,
         notificationHandler)
     {
     }
@@ -26,11 +28,22 @@ public class CategoriasController : MainController
 
         return Ok(resultado);
     }
-    
+
     [HttpGet]
-    public async Task<IActionResult> ListarCategoriaAsync([FromQuery] ListarCategoriaRequest request)
+    public async Task<IActionResult> ListarCategoriaAsync([FromQuery] ListarCategoriaRequest categoriaRequest)
     {
-        var resultado = await Mediator.Send(request);
+        var resultado = await Mediator.Send(categoriaRequest);
+
+        if (ProcessoInvalido())
+            return BadRequest(BaseResponse.Erro(ObterErros()));
+
+        return Ok(resultado);
+    }
+
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> ListarCategoriaAsync(Guid id)
+    {
+        var resultado = await Mediator.Send(new ListarCategoriaPorIdRequest(id));
 
         if (ProcessoInvalido())
             return BadRequest(BaseResponse.Erro(ObterErros()));
