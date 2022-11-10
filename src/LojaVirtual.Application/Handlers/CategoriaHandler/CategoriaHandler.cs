@@ -1,5 +1,7 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics.CodeAnalysis;
+using AutoMapper;
 using LojaVirtual.Application.Handlers.CategoriaHandler.Cadastrar;
+using LojaVirtual.Application.Handlers.CategoriaHandler.Editar;
 using LojaVirtual.Application.Handlers.CategoriaHandler.Listar;
 using LojaVirtual.Application.Handlers.CategoriaHandler.ListarPorId;
 using LojaVirtual.Core.DTOs;
@@ -14,7 +16,8 @@ public class CategoriaHandler :
     BaseHandler,
     IRequestHandler<CadastrarCategoriaRequest, BaseResponse>,
     IRequestHandler<ListarCategoriaRequest, BaseResponse>,
-    IRequestHandler<ListarCategoriaPorIdRequest, BaseResponse>
+    IRequestHandler<ListarCategoriaPorIdRequest, BaseResponse>,
+    IRequestHandler<EditarCategoriaRequest, BaseResponse>
 {
     private readonly ICategoriaRepository _categoriaRepository;
     private readonly IPaginacao<Categoria> _paginacaoCategorias;
@@ -36,7 +39,7 @@ public class CategoriaHandler :
 
         var categoria = Mapper.Map<Categoria>(request);
         await _categoriaRepository.AdicionarAsync(categoria);
-        await _categoriaRepository.UnityOfWork.SalvarAlteracoes();
+        await _categoriaRepository.UnityOfWork.SalvarAlteracoesAsync();
 
         return BaseResponse.Sucesso();
     }
@@ -68,12 +71,37 @@ public class CategoriaHandler :
 
         if (await _categoriaRepository.BuscarPorIdAsync(request.Id) is var categoria && categoria is null)
         {
-            await Mediator.Publish(new NotificacaoErro($"{typeof(ListarCategoriaPorIdRequest).Name}",
+            await Mediator.Publish(new NotificacaoErro($"{nameof(ListarCategoriaPorIdRequest)}",
                 "Categoria não encontrada."));
             return BaseResponse.Erro();
         }
 
         var categoriasResponse = Mapper.Map<ListarCategoriaPorIdResponse>(categoria);
         return BaseResponse.Sucesso(categoriasResponse);
+    }
+
+    public async Task<BaseResponse> Handle(EditarCategoriaRequest request, CancellationToken cancellationToken)
+    {
+        if (await ValidarAsync(request, new EditarCategoriaRequestValidator()) is var resultado && !resultado)
+            return BaseResponse.Erro();
+
+        if (await _categoriaRepository.BuscarPorIdAsync(request.Id) is var categoria && categoria is null)
+        {
+            await Mediator.Publish(new NotificacaoErro($"{nameof(EditarCategoriaRequest)}",
+                "Categoria não encontrada."));
+            return BaseResponse.Erro();
+        }
+
+        categoria.AlterarNome(request.Nome);
+        categoria.AlterarDescricao(request.Descricao);
+
+        if (request.Ativo)
+            categoria.Ativar();
+        else
+            categoria.Desativar();
+
+        _categoriaRepository.Atualizar(categoria);
+        await _categoriaRepository.UnityOfWork.SalvarAlteracoesAsync();
+        return BaseResponse.Sucesso(Mapper.Map<EditarCategoriaResponse>(categoria));
     }
 }

@@ -5,32 +5,27 @@ namespace LojaVirtual.Domain.Entities;
 public class Produto : Entity
 {
     public Guid CategoriaId { get; private set; }
-    public string? Nome { get; private set; }
-    public string? Descricao { get; private set; }
+    public string Nome { get; private set; }
+    public string Descricao { get; private set; }
     public bool Ativo { get; private set; }
     public decimal Valor { get; private set; }
     public DateTime Cadastro { get; private set; }
     public int QuantidadeEstoque { get; private set; }
 
     // Relações Entity
-    public Categoria Categoria { get; set; }
+    public Categoria? Categoria { get; set; }
 
-    public Produto(string? nome, string? descricao, decimal valor, int quantidadeEstoque)
+    public Produto(string nome, string descricao, decimal valor, int quantidadeEstoque, Guid categoriaId)
     {
         Nome = nome;
         Descricao = descricao;
         Valor = valor;
         QuantidadeEstoque = quantidadeEstoque;
+        CategoriaId = categoriaId;
         Ativo = true;
         Cadastro = DateTime.UtcNow;
-    }
-
-    public void AssociarCategoria(Guid categoriaId)
-    {
-        if (Guid.Empty == categoriaId)
-            throw new DomainException("Categoria inválida");
-
-        CategoriaId = categoriaId;
+        
+        Validar();
     }
 
     public void Ativar() => Ativo = true;
@@ -75,4 +70,23 @@ public class Produto : Entity
     }
 
     public bool PossuiEstoque(int quantidade) => QuantidadeEstoque >= quantidade;
+
+
+    public sealed override void Validar()
+    {
+        if (string.IsNullOrWhiteSpace(Nome))
+            throw new DomainException("Produto inválido");
+
+        if (string.IsNullOrWhiteSpace(Descricao))
+            throw new DomainException("Produto inválido");
+
+        if (Valor <= 0)
+            throw new DomainException("Produto inválido");
+
+        if (QuantidadeEstoque < 0)
+            throw new DomainException("Produto inválido");
+
+        if (CategoriaId == Guid.Empty)
+            throw new DomainException("Categoria inválida");
+    }
 }

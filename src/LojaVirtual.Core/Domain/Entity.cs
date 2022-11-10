@@ -8,4 +8,6 @@ public abstract class Entity
     {
         Id = Guid.NewGuid();
     }
+    
+    public abstract void Validar();
 }

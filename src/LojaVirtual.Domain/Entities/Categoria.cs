@@ -7,7 +7,7 @@ public class Categoria : Entity
     public string Nome { get; private set; }
     public string Descricao { get; private set; }
     public bool Ativo { get; private set; }
-    public DateTime Cadastro { get; private set; }
+    public DateTime Cadastro { get; }
 
     // Relações Entity
     public IQueryable<Produto> Produtos { get; set; }
@@ -18,6 +18,8 @@ public class Categoria : Entity
         Descricao = descricao;
         Ativo = true;
         Cadastro = DateTime.UtcNow;
+
+        Validar();
     }
 
     public void Ativar() => Ativo = true;
@@ -38,5 +40,14 @@ public class Categoria : Entity
             throw new DomainException("Descricao inválida.");
 
         Descricao = novaDescricao;
+    }
+
+    public sealed override void Validar()
+    {
+        if (string.IsNullOrWhiteSpace(Nome))
+            throw new DomainException("Categoria inválida");
+
+        if (string.IsNullOrWhiteSpace(Descricao))
+            throw new DomainException("Categoria inválida");
     }
 }

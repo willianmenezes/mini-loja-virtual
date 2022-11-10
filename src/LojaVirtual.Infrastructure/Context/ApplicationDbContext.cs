@@ -31,7 +31,7 @@ public class ApplicationDbContext : DbContext, IUnityOfWork
         base.OnModelCreating(modelBuilder);
     }
 
-    public async Task SalvarAlteracoes()
+    public async Task SalvarAlteracoesAsync()
     {
         foreach (var entry in ChangeTracker.Entries().Where(e => e.Entity.GetType().GetProperty("Cadastro") != null))
         {

@@ -8,7 +8,7 @@ namespace LojaVirtual.Infrastructure.Repositories;
 
 public class CategoriaRepository : ICategoriaRepository
 {
-    private readonly ApplicationDbContext _dbContext;
+    public readonly ApplicationDbContext _dbContext;
     public IUnityOfWork UnityOfWork => _dbContext;
 
     public CategoriaRepository(ApplicationDbContext dbContext)
@@ -19,6 +19,11 @@ public class CategoriaRepository : ICategoriaRepository
     public async Task AdicionarAsync(Categoria categoria)
     {
         await _dbContext.Categorias.AddAsync(categoria);
+    }
+
+    public void Atualizar(Categoria categoria)
+    {
+        _dbContext.Categorias.Update(categoria);
     }
 
     public async Task<Categoria?> BuscarPorIdAsync(Guid id)

@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace LojaVirtual.Application.Handlers.CategoriaHandler.Cadastrar;
+namespace LojaVirtual.Application.Handlers.CategoriaHandler.Editar;
 
-public class CadastrarCategoriaRequestValidator : AbstractValidator<CadastrarCategoriaRequest>
+public class EditarCategoriaRequestValidator : AbstractValidator<EditarCategoriaRequest>
 {
-    public CadastrarCategoriaRequestValidator()
+    public EditarCategoriaRequestValidator()
     {
         RuleFor(p => p.Nome)
             .NotEmpty().WithMessage("O nome da categoria é obrigatória.")

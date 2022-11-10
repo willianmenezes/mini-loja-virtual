@@ -2,5 +2,5 @@
 
 public interface IUnityOfWork
 {
-    Task SalvarAlteracoes();
+    Task SalvarAlteracoesAsync();
 }

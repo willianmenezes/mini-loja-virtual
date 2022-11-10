@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Handlers\CategoriaHandler\Editar" />
       <Folder Include="Handlers\Produto" />
     </ItemGroup>
 
