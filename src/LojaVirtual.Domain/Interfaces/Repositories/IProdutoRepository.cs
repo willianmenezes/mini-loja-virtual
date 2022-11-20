@@ -7,5 +7,6 @@ public interface IProdutoRepository
 {
     IUnityOfWork UnityOfWork { get; }
     Task AdicionarAsync(Produto produto);
+    Task<Produto?> BuscarPorIdAsync(Guid id);
     IQueryable<Produto> BuscarTodos();
 }

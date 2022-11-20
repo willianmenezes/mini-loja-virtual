@@ -100,7 +100,6 @@ public class CategoriaHandler :
         else
             categoria.Desativar();
 
-        _categoriaRepository.Atualizar(categoria);
         await _categoriaRepository.UnityOfWork.SalvarAlteracoesAsync();
         return BaseResponse.Sucesso(Mapper.Map<EditarCategoriaResponse>(categoria));
     }

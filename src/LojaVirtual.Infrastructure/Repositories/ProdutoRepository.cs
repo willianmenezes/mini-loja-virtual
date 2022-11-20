@@ -2,27 +2,31 @@
 using LojaVirtual.Domain.Entities;
 using LojaVirtual.Domain.Interfaces.Repositories;
 using LojaVirtual.Infrastructure.Context;
-using Microsoft.EntityFrameworkCore;
 
 namespace LojaVirtual.Infrastructure.Repositories;
 
 public class ProdutoRepository : IProdutoRepository
 {
-    private readonly ApplicationDbContext _dbContext;
-    public IUnityOfWork UnityOfWork => _dbContext;
+    private readonly ApplicationDbContext _context;
+    public IUnityOfWork UnityOfWork => _context;
 
-    public ProdutoRepository(ApplicationDbContext dbContext)
+    public ProdutoRepository(ApplicationDbContext context)
     {
-        _dbContext = dbContext;
+        _context = context;
     }
     
     public async Task AdicionarAsync(Produto produto)
     {
-        await _dbContext.Produtos.AddAsync(produto);
+        await _context.Produtos.AddAsync(produto);
+    }
+
+    public Task<Produto?> BuscarPorIdAsync(Guid id)
+    {
+        throw new NotImplementedException();
     }
 
     public IQueryable<Produto> BuscarTodos()
     {
-        return _dbContext.Produtos.Where(p => p.Ativo);
+        return _context.Produtos.Where(p => p.Ativo);
     }
 }

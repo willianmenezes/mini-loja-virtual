@@ -10,3 +10,9 @@ dotnet ef migrations add Inicial --startup-project .\src\LojaVirtual.WEB\LojaVir
 dotnet ef database update --startup-project .\src\LojaVirtual.WEB\LojaVirtual.WEB.csproj  --project .\src\LojaVirtual.Infras
 tructure\LojaVirtual.Infrastructure.csproj
 
+- Configurar path linux 
+dotnet new tool-manifest
+dotnet tool install --local dotnet-ef --version 6.0.10
+
+Não esquecer de rodar o container com o sqlserver
+

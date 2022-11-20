@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LojaVirtual.WEB.Controllers;
 
-[ApiController]
 [Route("[controller]")]
 public class CategoriasController : MainController
 {

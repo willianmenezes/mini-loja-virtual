@@ -21,11 +21,6 @@ public class CategoriaRepository : ICategoriaRepository
         await _dbContext.Categorias.AddAsync(categoria);
     }
 
-    public void Atualizar(Categoria categoria)
-    {
-        _dbContext.Categorias.Update(categoria);
-    }
-
     public async Task<Categoria?> BuscarPorIdAsync(Guid id)
     {
         return await _dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id);
