@@ -1,6 +1,4 @@
 namespace LojaVirtual.Application.Handlers.ProdutoHandler.Editar;
 
-public class EditarProdutoRequest
-{
-    
-}
+public record EditarProdutoRequest(Guid Id, string Nome, string Descricao, int QuantidadeEstoque, bool Ativo,
+    decimal Valor, Guid CategoriaId);

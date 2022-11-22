@@ -2,6 +2,7 @@
 using LojaVirtual.Domain.Entities;
 using LojaVirtual.Domain.Interfaces.Repositories;
 using LojaVirtual.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace LojaVirtual.Infrastructure.Repositories;
 
@@ -20,9 +21,12 @@ public class ProdutoRepository : IProdutoRepository
         await _context.Produtos.AddAsync(produto);
     }
 
-    public Task<Produto?> BuscarPorIdAsync(Guid id)
+    public async Task<Produto?> BuscarPorIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.Produtos
+            .AsNoTracking()
+            .Include(p => p.Categoria)
+            .FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public IQueryable<Produto> BuscarTodos()

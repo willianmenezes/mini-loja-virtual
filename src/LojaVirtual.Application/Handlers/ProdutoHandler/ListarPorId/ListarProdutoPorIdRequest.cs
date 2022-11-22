@@ -1,6 +1,6 @@
-namespace LojaVirtual.Application.Handlers.CategoriaHandler.ListarPorId;
+using LojaVirtual.Core.DTOs;
+using MediatR;
 
-public class ListarProdutoPorIdRequest
-{
-    
-}
+namespace LojaVirtual.Application.Handlers.ProdutoHandler.ListarPorId;
+
+public record ListarProdutoPorIdRequest(Guid Id) : IRequest<BaseResponse>;

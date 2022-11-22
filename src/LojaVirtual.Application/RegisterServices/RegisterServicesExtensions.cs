@@ -3,8 +3,10 @@ using LojaVirtual.Application.Handlers.CategoriaHandler.Cadastrar;
 using LojaVirtual.Application.Handlers.CategoriaHandler.Editar;
 using LojaVirtual.Application.Handlers.CategoriaHandler.Listar;
 using LojaVirtual.Application.Handlers.CategoriaHandler.ListarPorId;
+using LojaVirtual.Application.Handlers.ProdutoHandler;
 using LojaVirtual.Application.Handlers.ProdutoHandler.Cadastrar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.Listar;
+using LojaVirtual.Application.Handlers.ProdutoHandler.ListarPorId;
 using LojaVirtual.Application.Mappings;
 using LojaVirtual.Core.DTOs;
 using MediatR;
@@ -23,6 +25,7 @@ public static class RegisterServicesExtensions
         
         services.AddScoped<IRequestHandler<CadastrarProdutoRequest, BaseResponse>, ProdutoHandler>();
         services.AddScoped<IRequestHandler<ListarProdutoRequest, BaseResponse>, ProdutoHandler>();
+        services.AddScoped<IRequestHandler<ListarProdutoPorIdRequest, BaseResponse>, ProdutoHandler>();
         
         services.AddAutoMapper(typeof(CategoriaProfile));
         return services;

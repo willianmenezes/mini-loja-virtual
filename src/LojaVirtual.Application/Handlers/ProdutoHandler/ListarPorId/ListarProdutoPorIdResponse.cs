@@ -1,6 +1,6 @@
-namespace LojaVirtual.Application.Handlers.CategoriaHandler.ListarPorId;
+namespace LojaVirtual.Application.Handlers.ProdutoHandler.ListarPorId;
 
-public class ListarProdutoPorIdResponse
-{
-    
-}
+public record ListarProdutoPorIdResponse(Guid Id, string Nome, string Descricao, decimal Valor, int QuantidadeEstoque,
+    ListarProdutoPorIdCategoriaResponse Categoria);
+
+public record ListarProdutoPorIdCategoriaResponse(Guid Id, string Nome, string Descricao, bool Ativo);

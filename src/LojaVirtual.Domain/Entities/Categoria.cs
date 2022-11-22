@@ -10,7 +10,7 @@ public class Categoria : Entity
     public DateTime Cadastro { get; }
 
     // Relações Entity
-    public IQueryable<Produto> Produtos { get; set; }
+    public IEnumerable<Produto> Produtos { get; set; }
 
     public Categoria(string nome, string descricao)
     {
