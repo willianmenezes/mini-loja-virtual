@@ -68,6 +68,24 @@ public class Produto : Entity
 
         QuantidadeEstoque += quantidade;
     }
+    
+    public void AlterarValor(decimal valor)
+    {
+        if (valor is <= 0 or >= decimal.MaxValue)
+            throw new DomainException("Valor inválido.");
+
+        Valor = valor;
+    }
+    
+    public bool PossuiCategoria(Guid categoriaId)
+    {
+        return CategoriaId == categoriaId;
+    }
+    
+    public void AlterarCategoria(Guid categoria)
+    {
+        
+    }
 
     public bool PossuiEstoque(int quantidade) => QuantidadeEstoque >= quantidade;
 

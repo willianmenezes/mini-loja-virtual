@@ -24,13 +24,12 @@ public class ProdutoRepository : IProdutoRepository
     public async Task<Produto?> BuscarPorIdAsync(Guid id)
     {
         return await _context.Produtos
-            .AsNoTracking()
             .Include(p => p.Categoria)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public IQueryable<Produto> BuscarTodos()
     {
-        return _context.Produtos.Where(p => p.Ativo);
+        return _context.Produtos.AsNoTracking().Where(p => p.Ativo);
     }
 }

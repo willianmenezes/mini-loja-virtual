@@ -1,4 +1,5 @@
 using LojaVirtual.Application.Handlers.ProdutoHandler.Cadastrar;
+using LojaVirtual.Application.Handlers.ProdutoHandler.Editar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.Listar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.ListarPorId;
 using LojaVirtual.Core.NotificationError;
@@ -43,6 +44,23 @@ public class ProdutosController : MainController
     public async Task<IActionResult> ListarProdutoPorIdAsync(Guid id)
     {
         var resultado = await Mediator.Send(new ListarProdutoPorIdRequest(id));
+
+        if (ProcessoInvalido())
+            return BadRequest(BaseResponse.Erro(ObterErros()));
+
+        return Ok(resultado);
+    }
+    
+    [HttpPatch("{id:guid}")]
+    public async Task<IActionResult> EditarProdutoAsync(Guid id, [FromBody] EditarProdutoRequest request)
+    {
+        if (id != request.Id)
+            return BadRequest(BaseResponse.Erro(new List<NotificacaoErro>
+            {
+                new(nameof(EditarProdutoRequest), "Erro ao editar produto.")
+            }));
+        
+        var resultado = await Mediator.Send(request);
 
         if (ProcessoInvalido())
             return BadRequest(BaseResponse.Erro(ObterErros()));

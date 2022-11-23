@@ -1,5 +1,6 @@
 using AutoMapper;
 using LojaVirtual.Application.Handlers.ProdutoHandler.Cadastrar;
+using LojaVirtual.Application.Handlers.ProdutoHandler.Editar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.Listar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.ListarPorId;
 using LojaVirtual.Domain.Entities;
@@ -15,6 +16,7 @@ public class ProdutoProfile : Profile
 
         CreateMap<Produto, ListarProdutoResponse>();
         CreateMap<Produto, ListarProdutoPorIdResponse>();
+        CreateMap<Produto, EditarProdutoResponse>();
         CreateMap<Categoria, ListarProdutoPorIdCategoriaResponse>();
     }
 }

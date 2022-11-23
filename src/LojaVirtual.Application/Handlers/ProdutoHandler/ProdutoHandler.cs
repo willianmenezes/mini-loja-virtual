@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LojaVirtual.Application.Handlers.ProdutoHandler.Cadastrar;
+using LojaVirtual.Application.Handlers.ProdutoHandler.Editar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.Listar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.ListarPorId;
 using LojaVirtual.Core.DTOs;
@@ -14,7 +15,8 @@ public class ProdutoHandler :
     BaseHandler,
     IRequestHandler<CadastrarProdutoRequest, BaseResponse>,
     IRequestHandler<ListarProdutoRequest, BaseResponse>,
-    IRequestHandler<ListarProdutoPorIdRequest, BaseResponse>
+    IRequestHandler<ListarProdutoPorIdRequest, BaseResponse>,
+    IRequestHandler<EditarProdutoRequest, BaseResponse>
 {
     private readonly IProdutoRepository _produtoRepository;
     private readonly IPaginacao<Produto> _paginacaoProdutos;
@@ -76,5 +78,33 @@ public class ProdutoHandler :
 
         var produtoResponse = Mapper.Map<ListarProdutoPorIdResponse>(produto);
         return BaseResponse.Sucesso(produtoResponse);
+    }
+
+    public async Task<BaseResponse> Handle(EditarProdutoRequest request, CancellationToken cancellationToken)
+    {
+        if (await ValidarAsync(request, new EditarProdutoRequestValidator()) is var resultado && !resultado)
+            return BaseResponse.Erro();
+
+        if (await _produtoRepository.BuscarPorIdAsync(request.Id) is var produto && produto is null)
+        {
+            await Mediator.Publish(new NotificacaoErro($"{nameof(EditarProdutoRequest)}",
+                "Produto não encontrada."));
+            return BaseResponse.Erro();
+        }
+
+        produto.AlterarNome(request.Nome);
+        produto.AlterarDescricao(request.Descricao);
+        produto.AlterarValor(request.Valor);
+
+        if (produto.PossuiCategoria(request.CategoriaId) == false)
+            produto.AlterarCategoria(request.CategoriaId);
+
+        if (request.Ativo)
+            produto.Ativar();
+        else
+            produto.Desativar();
+
+        await _produtoRepository.UnityOfWork.SalvarAlteracoesAsync();
+        return BaseResponse.Sucesso(Mapper.Map<EditarProdutoResponse>(produto));
     }
 }
