@@ -31,7 +31,6 @@ public class ProdutoRepository : IProdutoRepository
     public IQueryable<Produto> BuscarTodos()
     {
         return _context.Produtos
-            .AsNoTracking()
-            .Where(p => p.Ativo);
+            .AsNoTracking().Where(p => p.Ativo);
     }
 }
