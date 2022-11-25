@@ -11,8 +11,9 @@ public class Pedido : Entity
     private List<PedidoItem> _pedidoItems;
     public IEnumerable<PedidoItem> PedidoItens => _pedidoItems;
 
-    public Pedido()
+    public Pedido(Guid usuarioId)
     {
+        UsuarioId = usuarioId;
         _pedidoItems = new List<PedidoItem>();
         Status = StatusPedido.EmAndamento;
     }
@@ -78,6 +79,11 @@ public class Pedido : Entity
     private PedidoItem? ExistePedidoItem(PedidoItem item)
     {
         return _pedidoItems.FirstOrDefault(pedidoItem => pedidoItem.ProdutoId == item.ProdutoId);
+    }
+    
+    public bool ExistePedidoItem(Guid produtoId)
+    {
+        return _pedidoItems.Any(pedidoItem => pedidoItem.ProdutoId == produtoId);
     }
 
     public override void Validar()

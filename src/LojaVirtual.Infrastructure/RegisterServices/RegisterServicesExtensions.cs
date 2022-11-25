@@ -19,6 +19,7 @@ public static class RegisterServicesExtensions
 
         services.AddScoped<ICategoriaRepository, CategoriaRepository>();
         services.AddScoped<IProdutoRepository, ProdutoRepository>();
+        services.AddScoped<IPedidoRepository, PedidoRepository>();
         services.AddScoped(typeof(IPaginacao<>), typeof(Paginacao<>));
         return services;
     }
