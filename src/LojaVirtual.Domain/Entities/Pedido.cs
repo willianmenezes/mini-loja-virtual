@@ -10,13 +10,13 @@ public class Pedido : Entity
     public StatusPedido Status { get; private set; }
     private List<PedidoItem> _pedidoItems;
     public IEnumerable<PedidoItem> PedidoItens => _pedidoItems;
-    
+
     public Pedido()
     {
         _pedidoItems = new List<PedidoItem>();
         Status = StatusPedido.EmAndamento;
     }
-    
+
     public void CalcularValorTotal()
     {
         ValorTotal = _pedidoItems.Sum(pedidoItem => pedidoItem.CalcularValor());
@@ -27,7 +27,7 @@ public class Pedido : Entity
         pedidoItem.VincularPedido(Id);
 
         if (ExistePedidoItem(pedidoItem)
-            is var itemEncontrado && itemEncontrado != null)
+                is var itemEncontrado && itemEncontrado != null)
         {
             itemEncontrado.AdicionarQuantidade(pedidoItem.Quantidade);
             pedidoItem = itemEncontrado;
@@ -44,7 +44,7 @@ public class Pedido : Entity
     public void RemoverItem(PedidoItem pedidoItem)
     {
         if (ExistePedidoItem(pedidoItem)
-           is var itemEncontrado && itemEncontrado == null)
+                is var itemEncontrado && itemEncontrado == null)
         {
             throw new DomainException("O item nao foi encontrado no pedido. Item invalido.");
         }
@@ -56,7 +56,7 @@ public class Pedido : Entity
     public void AtualizarQuantidadeItem(PedidoItem item, int novaQuantidade)
     {
         if (ExistePedidoItem(item)
-           is var itemEncontrado && itemEncontrado == null)
+                is var itemEncontrado && itemEncontrado == null)
         {
             throw new DomainException("O item nao foi encontrado no pedido. Item invalido.");
         }
