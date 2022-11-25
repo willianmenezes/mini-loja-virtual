@@ -17,4 +17,10 @@
       <ProjectReference Include="..\LojaVirtual.Domain\LojaVirtual.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Handlers\PedidoHandler\AdicionarItemPedido" />
+      <Folder Include="Handlers\PedidoHandler\FinalizarPedido" />
+      <Folder Include="Handlers\PedidoHandler\RemoverItemPedido" />
+    </ItemGroup>
+
 </Project>

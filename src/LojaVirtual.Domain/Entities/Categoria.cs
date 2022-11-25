@@ -7,7 +7,6 @@ public class Categoria : Entity
     public string Nome { get; private set; }
     public string Descricao { get; private set; }
     public bool Ativo { get; private set; }
-    public DateTime Cadastro { get; }
 
     // Relações Entity
     public IEnumerable<Produto> Produtos { get; set; }
@@ -17,7 +16,6 @@ public class Categoria : Entity
         Nome = nome;
         Descricao = descricao;
         Ativo = true;
-        Cadastro = DateTime.UtcNow;
 
         Validar();
     }

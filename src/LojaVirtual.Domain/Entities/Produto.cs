@@ -9,7 +9,6 @@ public class Produto : Entity
     public string Descricao { get; private set; }
     public bool Ativo { get; private set; }
     public decimal Valor { get; private set; }
-    public DateTime Cadastro { get; private set; }
     public int QuantidadeEstoque { get; private set; }
 
     // Relações Entity
@@ -23,7 +22,6 @@ public class Produto : Entity
         QuantidadeEstoque = quantidadeEstoque;
         CategoriaId = categoriaId;
         Ativo = true;
-        Cadastro = DateTime.UtcNow;
         
         Validar();
     }

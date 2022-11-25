@@ -32,6 +32,5 @@ public class ProdutoEntityConfig : IEntityTypeConfiguration<Produto>
 
         b.HasOne(p => p.Categoria)
             .WithMany(c => c.Produtos);
-
     }
 }
