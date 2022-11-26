@@ -1,4 +1,5 @@
-﻿using LojaVirtual.Core.NotificationError;
+﻿using LojaVirtual.Core.Integration;
+using LojaVirtual.Core.NotificationError;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,6 +10,8 @@ public static class RegisterServicesExtensions
     public static IServiceCollection RegistrarServicosCore(this IServiceCollection services)
     {
         services.AddMediatR(typeof(NotificacaoErro).Assembly);
+        services.AddScoped<INotificationHandler<FinalizarPedidoEvent>, ApplicationEventsHandler>();
+        
         services.AddScoped<INotificationHandler<NotificacaoErro>, NotificacaoErroHandler>();
         return services;
     }

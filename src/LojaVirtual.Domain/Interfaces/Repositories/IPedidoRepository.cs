@@ -6,7 +6,7 @@ namespace LojaVirtual.Domain.Interfaces.Repositories;
 public interface IPedidoRepository
 {
     IUnityOfWork UnityOfWork { get; }
-    Task<Pedido?> BuscarPedidoIniciadoPorIdUsuarioAsync(Guid usuarioId);
+    Task<Pedido?> BuscarPedidoCarrinhoPorIdUsuarioAsync(Guid usuarioId);
     IQueryable<Pedido> ObterPedidosPorUsuario(Guid usuarioId);
     Task AdicionarAsync(Pedido pedido);
     Task<Pedido?> BuscarPorIdAsync(Guid id);

@@ -2,10 +2,9 @@ namespace LojaVirtual.Domain.Enums;
 
 public enum StatusPedido
 {
-    EmAndamento,
-    AguardandoPagamento,
-    Pago,
-    Entregue,
+    Carrinho,
+    Iniciado,
     Concluido,
+    ErroProcessamento,
     Cancelado
 }

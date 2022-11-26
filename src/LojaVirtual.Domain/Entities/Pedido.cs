@@ -15,13 +15,16 @@ public class Pedido : Entity
     {
         UsuarioId = usuarioId;
         _pedidoItems = new List<PedidoItem>();
-        Status = StatusPedido.EmAndamento;
+        Status = StatusPedido.Carrinho;
     }
 
     public void CalcularValorTotal()
     {
         ValorTotal = _pedidoItems.Sum(pedidoItem => pedidoItem.CalcularValor());
     }
+
+    public void IniciarPedido() => Status = StatusPedido.Iniciado;
+    public void RetornarPedidoCarrinho() => Status = StatusPedido.Carrinho;
 
     public void AdicionarItemNoPedido(PedidoItem pedidoItem)
     {
@@ -64,16 +67,6 @@ public class Pedido : Entity
 
         itemEncontrado.AtualizarQuantidade(novaQuantidade);
         CalcularValorTotal();
-    }
-
-    public void AguardarPagamento()
-    {
-        Status = StatusPedido.AguardandoPagamento;
-    }
-
-    public void ConcluirPedido()
-    {
-        Status = StatusPedido.Concluido;
     }
 
     private PedidoItem? ExistePedidoItem(PedidoItem item)

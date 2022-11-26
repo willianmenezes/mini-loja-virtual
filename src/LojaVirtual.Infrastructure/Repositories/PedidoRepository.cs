@@ -17,9 +17,9 @@ public class PedidoRepository : IPedidoRepository
         _context = context;
     }
 
-    public async Task<Pedido?> BuscarPedidoIniciadoPorIdUsuarioAsync(Guid usuarioId)
+    public async Task<Pedido?> BuscarPedidoCarrinhoPorIdUsuarioAsync(Guid usuarioId)
     {
-        var pedido = await _context.Pedidos.FirstOrDefaultAsync(p => p.UsuarioId == usuarioId && p.Status == StatusPedido.EmAndamento);
+        var pedido = await _context.Pedidos.FirstOrDefaultAsync(p => p.UsuarioId == usuarioId && p.Status == StatusPedido.Carrinho);
         if (pedido == null) return null;
 
         await _context.Entry(pedido)
@@ -32,7 +32,7 @@ public class PedidoRepository : IPedidoRepository
     {
         return _context.Pedidos
             .AsNoTracking()
-            .Where(p => p.UsuarioId == usuarioId && p.Status != StatusPedido.EmAndamento);
+            .Where(p => p.UsuarioId == usuarioId && p.Status != StatusPedido.Carrinho);
     }
 
     public async Task AdicionarAsync(Pedido pedido)

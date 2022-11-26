@@ -4,6 +4,7 @@ using LojaVirtual.Application.Handlers.ProdutoHandler.Editar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.Listar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.ListarPorId;
 using LojaVirtual.Core.DTOs;
+using LojaVirtual.Core.Integration;
 using LojaVirtual.Core.NotificationError;
 using LojaVirtual.Domain.Entities;
 using LojaVirtual.Domain.Interfaces.Repositories;
@@ -16,7 +17,8 @@ public class ProdutoHandler :
     IRequestHandler<CadastrarProdutoRequest, BaseResponse>,
     IRequestHandler<ListarProdutoRequest, BaseResponse>,
     IRequestHandler<ListarProdutoPorIdRequest, BaseResponse>,
-    IRequestHandler<EditarProdutoRequest, BaseResponse>
+    IRequestHandler<EditarProdutoRequest, BaseResponse>,
+    IRequestHandler<MovimentarEstoqueRequest, bool>
 {
     private readonly IProdutoRepository _produtoRepository;
     private readonly IPaginacao<Produto> _paginacaoProdutos;
@@ -65,7 +67,6 @@ public class ProdutoHandler :
 
     public async Task<BaseResponse> Handle(ListarProdutoPorIdRequest request, CancellationToken cancellationToken)
     {
-        
         if (await ValidarAsync(request, new ListarProdutoPorIdRequestValidator()) is var resultado && !resultado)
             return BaseResponse.Erro();
 
@@ -106,5 +107,28 @@ public class ProdutoHandler :
 
         await _produtoRepository.UnityOfWork.SalvarAlteracoesAsync();
         return BaseResponse.Sucesso(Mapper.Map<EditarProdutoResponse>(produto));
+    }
+
+    public async Task<bool> Handle(MovimentarEstoqueRequest request, CancellationToken cancellationToken)
+    {
+        foreach (var item in request.Itens)
+        {
+            var produto = await _produtoRepository.BuscarPorIdAsync(item.Id);
+            
+            if (produto is null)
+                return false;
+
+            if (!produto.PossuiEstoque(item.Quantidade))
+            {
+                await Mediator.Publish(new NotificacaoErro($"{nameof(MovimentarEstoqueRequest)}",
+                    "Produto sem estoque."));
+                return false;
+            }
+            
+            produto.DebitarEstoque(item.Quantidade);
+        }
+
+        await _produtoRepository.UnityOfWork.SalvarAlteracoesAsync();
+        return true;
     }
 }
