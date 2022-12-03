@@ -2,6 +2,7 @@ using AutoMapper;
 using LojaVirtual.Application.Handlers.PedidoHandler.AdicionarItemPedido;
 using LojaVirtual.Application.Handlers.PedidoHandler.FinalizarPedido;
 using LojaVirtual.Core.DTOs;
+using LojaVirtual.Core.Handlers;
 using LojaVirtual.Core.Integration;
 using LojaVirtual.Core.NotificationError;
 using LojaVirtual.Domain.Entities;

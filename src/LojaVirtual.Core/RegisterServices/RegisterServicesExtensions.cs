@@ -9,9 +9,7 @@ public static class RegisterServicesExtensions
 {
     public static IServiceCollection RegistrarServicosCore(this IServiceCollection services)
     {
-        services.AddMediatR(typeof(NotificacaoErro).Assembly);
         services.AddScoped<INotificationHandler<FinalizarPedidoEvent>, ApplicationEventsHandler>();
-        
         services.AddScoped<INotificationHandler<NotificacaoErro>, NotificacaoErroHandler>();
         return services;
     }

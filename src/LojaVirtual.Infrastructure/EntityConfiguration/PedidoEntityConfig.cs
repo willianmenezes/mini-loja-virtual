@@ -30,5 +30,8 @@ public class PedidoEntityConfig : IEntityTypeConfiguration<Pedido>
             .WithOne(i => i.Pedido)
             .HasForeignKey(p => p.PedidoId)
             .HasConstraintName("PedidoItem_Pedido_FK");
+        
+        b.HasOne(x => x.Pagamento)
+            .WithOne(x => x.Pedido);
     }
 }

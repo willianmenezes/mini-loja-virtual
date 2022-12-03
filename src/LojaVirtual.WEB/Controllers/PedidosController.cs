@@ -36,9 +36,9 @@ public class PedidosController : MainController
     }
 
     [HttpGet("carrinho")]
-    public async Task<IActionResult> BuscarCarrinhoAsync([FromRoute] Guid usuarioId)
+    public async Task<IActionResult> BuscarCarrinhoAsync()
     {
-        usuarioId = Guid.Parse("364d41a8-a916-4b59-8d31-bfa1b74de6e7");
+        var usuarioId = Guid.Parse("364d41a8-a916-4b59-8d31-bfa1b74de6e7");
         var pedidoEmAndamento = await _pedidoRepository.BuscarPedidoCarrinhoPorIdUsuarioAsync(usuarioId);
 
         if (pedidoEmAndamento is null)

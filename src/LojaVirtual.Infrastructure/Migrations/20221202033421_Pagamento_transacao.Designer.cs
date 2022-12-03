@@ -4,6 +4,7 @@ using LojaVirtual.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LojaVirtual.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221202033421_Pagamento_transacao")]
+    partial class Pagamento_transacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,16 +80,10 @@ namespace LojaVirtual.Infrastructure.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(400)");
 
-                    b.Property<Guid>("PedidoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PedidoId")
-                        .IsUnique();
 
                     b.ToTable("Pagamentos");
                 });
@@ -219,17 +215,6 @@ namespace LojaVirtual.Infrastructure.Migrations
                     b.ToTable("Transacoes");
                 });
 
-            modelBuilder.Entity("LojaVirtual.Domain.Entities.Pagamento", b =>
-                {
-                    b.HasOne("LojaVirtual.Domain.Entities.Pedido", "Pedido")
-                        .WithOne("Pagamento")
-                        .HasForeignKey("LojaVirtual.Domain.Entities.Pagamento", "PedidoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pedido");
-                });
-
             modelBuilder.Entity("LojaVirtual.Domain.Entities.PedidoItem", b =>
                 {
                     b.HasOne("LojaVirtual.Domain.Entities.Pedido", "Pedido")
@@ -278,9 +263,6 @@ namespace LojaVirtual.Infrastructure.Migrations
 
             modelBuilder.Entity("LojaVirtual.Domain.Entities.Pedido", b =>
                 {
-                    b.Navigation("Pagamento")
-                        .IsRequired();
-
                     b.Navigation("PedidoItens");
                 });
 #pragma warning restore 612, 618

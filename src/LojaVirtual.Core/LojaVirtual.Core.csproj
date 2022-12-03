@@ -10,5 +10,14 @@
         <PackageReference Include="MediatR" Version="11.0.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Reference Include="AutoMapper">
+        <HintPath>..\..\..\..\..\.nuget\packages\automapper\12.0.0\lib\netstandard2.1\AutoMapper.dll</HintPath>
+      </Reference>
+      <Reference Include="FluentValidation">
+        <HintPath>..\..\..\..\..\.nuget\packages\fluentvalidation\11.2.2\lib\net6.0\FluentValidation.dll</HintPath>
+      </Reference>
+    </ItemGroup>
 
 </Project>

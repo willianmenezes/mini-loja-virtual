@@ -3,7 +3,7 @@ using FluentValidation;
 using LojaVirtual.Core.NotificationError;
 using MediatR;
 
-namespace LojaVirtual.Application.Handlers;
+namespace LojaVirtual.Core.Handlers;
 
 public abstract class BaseHandler
 {

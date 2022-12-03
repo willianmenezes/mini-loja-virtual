@@ -4,6 +4,7 @@ using LojaVirtual.Application.Handlers.ProdutoHandler.Editar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.Listar;
 using LojaVirtual.Application.Handlers.ProdutoHandler.ListarPorId;
 using LojaVirtual.Core.DTOs;
+using LojaVirtual.Core.Handlers;
 using LojaVirtual.Core.Integration;
 using LojaVirtual.Core.NotificationError;
 using LojaVirtual.Domain.Entities;

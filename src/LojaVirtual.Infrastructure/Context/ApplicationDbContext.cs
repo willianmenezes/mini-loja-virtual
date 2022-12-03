@@ -10,6 +10,8 @@ public class ApplicationDbContext : DbContext, IUnityOfWork
     public DbSet<Categoria> Categorias { get; set; }
     public DbSet<Pedido> Pedidos { get; set; }
     public DbSet<PedidoItem> PedidoItem { get; set; }
+    public DbSet<Pagamento> Pagamentos { get; set; }
+    public DbSet<Transacao> Transacoes { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

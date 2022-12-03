@@ -10,6 +10,7 @@ public class Pedido : Entity
     public StatusPedido Status { get; private set; }
     private List<PedidoItem> _pedidoItems;
     public IEnumerable<PedidoItem> PedidoItens => _pedidoItems;
+    public Pagamento Pagamento { get; private set; }
 
     public Pedido(Guid usuarioId)
     {
@@ -41,7 +42,6 @@ public class Pedido : Entity
             _pedidoItems.Add(pedidoItem);
         }
 
-        pedidoItem.CalcularValor();
         CalcularValorTotal();
     }
 
@@ -73,7 +73,7 @@ public class Pedido : Entity
     {
         return _pedidoItems.FirstOrDefault(pedidoItem => pedidoItem.ProdutoId == item.ProdutoId);
     }
-    
+
     public bool ExistePedidoItem(Guid produtoId)
     {
         return _pedidoItems.Any(pedidoItem => pedidoItem.ProdutoId == produtoId);
